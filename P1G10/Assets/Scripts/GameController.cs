@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     Soundbite currentFirstSound;
     Soundbite currentSecondSound;
     Soundbite currentThirdSound;
+    public string currentAnswer;
     GameObject firstSoundTextObject;
     GameObject secondSoundTextObject;
     GameObject thirdSoundTextObject;
@@ -23,32 +24,36 @@ public class GameController : MonoBehaviour
     }
     public void LoadNewValues()
     {
-        if (ActiveSounds.ActiveSoundsInfo.guessValue != 0)
+        currentFirstSound = ActiveSounds.ActiveSoundsInfo.FirstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.FirstSound.Length)];
+        while (currentFirstSound == null)
         {
             currentFirstSound = ActiveSounds.ActiveSoundsInfo.FirstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.FirstSound.Length)];
-            while (currentFirstSound == null)
-            {
-                currentFirstSound = ActiveSounds.ActiveSoundsInfo.FirstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.FirstSound.Length)];
-            }
         }
-        if (ActiveSounds.ActiveSoundsInfo.guessValue != 1)
+        if (ActiveSounds.ActiveSoundsInfo.guessValue == 0)
+        {
+            currentAnswer = currentFirstSound.value;
+        }
+        currentSecondSound = ActiveSounds.ActiveSoundsInfo.SecondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.SecondSound.Length)];
+        while (currentSecondSound == null)
         {
             currentSecondSound = ActiveSounds.ActiveSoundsInfo.SecondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.SecondSound.Length)];
-            while (currentSecondSound == null)
-            {
-                currentSecondSound = ActiveSounds.ActiveSoundsInfo.SecondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.SecondSound.Length)];
-            }
         }
-        if (ActiveSounds.ActiveSoundsInfo.guessValue != 2)
+        if (ActiveSounds.ActiveSoundsInfo.guessValue == 1)
+        {
+            currentAnswer = currentSecondSound.value;
+        }
+        currentThirdSound = ActiveSounds.ActiveSoundsInfo.ThirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.ThirdSound.Length)];
+        while (currentThirdSound == null)
         {
             currentThirdSound = ActiveSounds.ActiveSoundsInfo.ThirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.ThirdSound.Length)];
-            while (currentThirdSound == null)
-            {
-                currentThirdSound = ActiveSounds.ActiveSoundsInfo.ThirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.ThirdSound.Length)];
-            }
+        }
+        if (ActiveSounds.ActiveSoundsInfo.guessValue == 2)
+        {
+            currentAnswer = currentThirdSound.value;
         }
         SetTextValues();
     }
+
     public void SetTextValues()
     {
         if (ActiveSounds.ActiveSoundsInfo.guessValue != 0)
