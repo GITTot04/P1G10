@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     GameObject firstSoundTextObject;
     GameObject secondSoundTextObject;
     GameObject thirdSoundTextObject;
+    AudioSource currentAudio;
+    bool canPlay = true;
     private void Awake()
     {
         firstSoundTextObject = GameObject.Find("FirstSoundText");
@@ -20,7 +22,9 @@ public class GameController : MonoBehaviour
     }
     private void Start()
     {
+        currentAudio = GetComponent<AudioSource>();
         LoadNewValues();
+        StartCoroutine(PlayAudio());
     }
     public void LoadNewValues()
     {
@@ -81,6 +85,27 @@ public class GameController : MonoBehaviour
         else
         {
             thirdSoundTextObject.GetComponent<TextMeshProUGUI>().text = "_ I";
+        }
+        StopAllCoroutines();
+        canPlay = true;
+        StartCoroutine(PlayAudio());
+    }
+
+    public IEnumerator PlayAudio()
+    {
+        if (canPlay)
+        {
+            canPlay = false;
+            currentAudio.clip = currentFirstSound.audio;
+            currentAudio.Play();
+            yield return new WaitForSeconds(currentAudio.clip.length);
+            currentAudio.clip = currentSecondSound.audio;
+            currentAudio.Play();
+            yield return new WaitForSeconds(currentAudio.clip.length);
+            currentAudio.clip = currentThirdSound.audio;
+            currentAudio.Play();
+            yield return new WaitForSeconds(currentAudio.clip.length);
+            canPlay = true;
         }
     }
 }

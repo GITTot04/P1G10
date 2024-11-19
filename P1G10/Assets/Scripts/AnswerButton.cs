@@ -37,7 +37,10 @@ public class AnswerButton : MonoBehaviour
                     feedbackText.GetComponent<TextMeshProUGUI>().text = "Øv!";
                 }
             }
-            gameController.GetComponent<GameController>().LoadNewValues();
+            if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
+            {
+                gameController.GetComponent<GameController>().LoadNewValues();
+            }
         }
     }
 }
