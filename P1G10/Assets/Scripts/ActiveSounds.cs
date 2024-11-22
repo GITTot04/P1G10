@@ -30,36 +30,40 @@ public class ActiveSounds : MonoBehaviour
     }
     public void SaveActiveSounds()
     {
-        Array.Clear(FirstSound,0,FirstSound.Length);
-        Array.Clear(SecondSound,0,SecondSound.Length);
-        Array.Clear(ThirdSound,0,ThirdSound.Length);
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        foreach (GameObject FirstSoundToggle in GameObject.FindGameObjectsWithTag("FirstSound"))
+        if (CheckFirstSoundToggles() && CheckSecondSoundToggles() && CheckThirdSoundToggles())
         {
-            if (FirstSoundToggle.GetComponent<Toggle>().isOn)
+            Array.Clear(FirstSound, 0, FirstSound.Length);
+            Array.Clear(SecondSound, 0, SecondSound.Length);
+            Array.Clear(ThirdSound, 0, ThirdSound.Length);
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            foreach (GameObject FirstSoundToggle in GameObject.FindGameObjectsWithTag("FirstSound"))
             {
-                FirstSound[i] = FirstSoundToggle.GetComponent<Soundbite>();
-                i++;
+                if (FirstSoundToggle.GetComponent<Toggle>().isOn)
+                {
+                    FirstSound[i] = FirstSoundToggle.GetComponent<Soundbite>();
+                    i++;
+                }
+            }
+            foreach (GameObject SecondSoundToggle in GameObject.FindGameObjectsWithTag("SecondSound"))
+            {
+                if (SecondSoundToggle.GetComponent<Toggle>().isOn)
+                {
+                    SecondSound[j] = SecondSoundToggle.GetComponent<Soundbite>();
+                    j++;
+                }
+            }
+            foreach (GameObject ThirdSoundToggle in GameObject.FindGameObjectsWithTag("ThirdSound"))
+            {
+                if (ThirdSoundToggle.GetComponent<Toggle>().isOn)
+                {
+                    ThirdSound[k] = ThirdSoundToggle.GetComponent<Soundbite>();
+                    k++;
+                }
             }
         }
-        foreach (GameObject SecondSoundToggle in GameObject.FindGameObjectsWithTag("SecondSound"))
-        {
-            if (SecondSoundToggle.GetComponent<Toggle>().isOn)
-            {
-                SecondSound[j] = SecondSoundToggle.GetComponent<Soundbite>();
-                j++;
-            }
-        }
-        foreach (GameObject ThirdSoundToggle in GameObject.FindGameObjectsWithTag("ThirdSound"))
-        {
-            if (ThirdSoundToggle.GetComponent<Toggle>().isOn)
-            {
-                ThirdSound[k] = ThirdSoundToggle.GetComponent<Soundbite>();
-                k++;
-            }
-        }
+
     }
     public void ChangeChildrenActivation()
     {
@@ -83,5 +87,39 @@ public class ActiveSounds : MonoBehaviour
                 }
             }
         }
+    }
+
+    bool CheckFirstSoundToggles()
+    {
+        foreach (GameObject FirstSoundToggle in GameObject.FindGameObjectsWithTag("FirstSound"))
+        {
+            if (FirstSoundToggle.GetComponent<Toggle>().isOn)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool CheckSecondSoundToggles()
+    {
+        foreach (GameObject SecondSoundToggle in GameObject.FindGameObjectsWithTag("SecondSound"))
+        {
+            if (SecondSoundToggle.GetComponent<Toggle>().isOn)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    bool CheckThirdSoundToggles()
+    {
+        foreach (GameObject ThirdSoundToggle in GameObject.FindGameObjectsWithTag("ThirdSound"))
+        {
+            if (ThirdSoundToggle.GetComponent<Toggle>().isOn)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
