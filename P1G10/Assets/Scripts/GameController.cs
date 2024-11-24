@@ -14,17 +14,24 @@ public class GameController : MonoBehaviour
     GameObject thirdSoundTextObject;
     AudioSource currentAudio;
     bool canPlay = true;
+    GameObject ConsonantAnswerButtons;
+    GameObject VowelAnswerButtons;
     private void Awake()
     {
         firstSoundTextObject = GameObject.Find("FirstSoundText");
         secondSoundTextObject = GameObject.Find("SecondSoundText");
         thirdSoundTextObject = GameObject.Find("ThirdSoundText");
+        ConsonantAnswerButtons = GameObject.Find("ConsonantAnswerButtons");
+        VowelAnswerButtons = GameObject.Find("VowelAnswerButtons");
+
     }
     private void Start()
     {
         currentAudio = GetComponent<AudioSource>();
         LoadNewValues();
+        SetAnswerButtons();
         StartCoroutine(PlayAudio());
+
     }
     public void LoadNewValues()
     {
@@ -89,6 +96,18 @@ public class GameController : MonoBehaviour
         StopAllCoroutines();
         canPlay = true;
         StartCoroutine(PlayAudio());
+    }
+
+    public void SetAnswerButtons()
+    {
+        if (ActiveSounds.ActiveSoundsInfo.guessValue == 1)
+        {
+            ConsonantAnswerButtons.SetActive(false);
+        }
+        else
+        {
+            VowelAnswerButtons.SetActive(false);
+        }
     }
 
     public IEnumerator PlayAudio()
