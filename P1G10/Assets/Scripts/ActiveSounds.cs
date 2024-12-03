@@ -14,6 +14,7 @@ public class ActiveSounds : MonoBehaviour
     public Soundbite[] ThirdSound = new Soundbite[20];
     public GameObject[] children = new GameObject[10];
     public int guessValue = 0;
+    public string voice = "M1";
     private void Awake()
     {
         if (ActiveSoundsInfo != null)

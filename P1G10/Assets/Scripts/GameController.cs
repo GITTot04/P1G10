@@ -8,10 +8,12 @@ public class GameController : MonoBehaviour
     Soundbite currentFirstSound;
     Soundbite currentSecondSound;
     Soundbite currentThirdSound;
+    AudioClip currentFullSound;
     public string currentAnswer;
     GameObject firstSoundTextObject;
     GameObject secondSoundTextObject;
     GameObject thirdSoundTextObject;
+    string audioFileName;
     AudioSource currentAudio;
     bool canPlay = true;
     GameObject ConsonantAnswerButtons;
@@ -62,6 +64,11 @@ public class GameController : MonoBehaviour
         {
             currentAnswer = currentThirdSound.value;
         }
+        audioFileName = currentFirstSound.value + currentSecondSound.value + currentThirdSound.value + "i_";
+        audioFileName = audioFileName.ToLower();
+        audioFileName += ActiveSounds.ActiveSoundsInfo.voice;
+        currentFullSound = Resources.Load <AudioClip>("Sounds/" + ActiveSounds.ActiveSoundsInfo.voice + "/" + audioFileName);
+        Debug.Log("Kontrol Sounds/" + ActiveSounds.ActiveSoundsInfo.voice + "/" + audioFileName);
         SetTextValues();
     }
 
@@ -115,6 +122,10 @@ public class GameController : MonoBehaviour
         if (canPlay)
         {
             canPlay = false;
+            currentAudio.clip = currentFullSound;
+            currentAudio.Play();
+            yield return new WaitForSeconds(currentAudio.clip.length);
+            /*
             currentAudio.clip = currentFirstSound.audio;
             currentAudio.Play();
             yield return new WaitForSeconds(currentAudio.clip.length);
@@ -124,6 +135,7 @@ public class GameController : MonoBehaviour
             currentAudio.clip = currentThirdSound.audio;
             currentAudio.Play();
             yield return new WaitForSeconds(currentAudio.clip.length);
+            */
             canPlay = true;
         }
     }
