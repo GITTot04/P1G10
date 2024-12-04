@@ -8,6 +8,8 @@ TagManager:
   - SecondSound
   - ThirdSound
   - Enemy
+  - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -15,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Ground
   - 
   - 
   - 
@@ -44,4 +46,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2419773827
+    locked: 0
+  - name: Obstacles
+    uniqueID: 818309361
+    locked: 0
+  - name: Player
+    uniqueID: 3247419177
     locked: 0
