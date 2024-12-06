@@ -44,7 +44,6 @@ public class ActiveSounds : MonoBehaviour
                 if (FirstSoundToggle.GetComponent<Toggle>().isOn)
                 {
                     firstSound[i] = FirstSoundToggle.GetComponent<Soundbite>();
-                    Debug.Log(i);
                     i++;
                 }
             }
@@ -53,7 +52,6 @@ public class ActiveSounds : MonoBehaviour
                 if (SecondSoundToggle.GetComponent<Toggle>().isOn)
                 {
                     secondSound[j] = SecondSoundToggle.GetComponent<Soundbite>();
-                    Debug.Log(j);
                     j++;
                 }
             }
@@ -62,7 +60,6 @@ public class ActiveSounds : MonoBehaviour
                 if (ThirdSoundToggle.GetComponent<Toggle>().isOn)
                 {
                     thirdSound[k] = ThirdSoundToggle.GetComponent<Soundbite>();
-                    Debug.Log(k);
                     k++;
                 }
             }
