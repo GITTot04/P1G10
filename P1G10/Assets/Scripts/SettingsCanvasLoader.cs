@@ -9,6 +9,7 @@ public class SettingsCanvasLoader : MonoBehaviour
     {
         ActiveSounds.ActiveSoundsInfo.ChangeChildrenActivation();
         // NEDEUNDER VIRKER IKKE ENDNU
+        /*
         foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("FirstSound"))
         {
             toggle.GetComponent<Toggle>().isOn = false;
@@ -21,5 +22,6 @@ public class SettingsCanvasLoader : MonoBehaviour
         {
             toggle.GetComponent<Toggle>().isOn = false;
         }
+        */
     }
 }

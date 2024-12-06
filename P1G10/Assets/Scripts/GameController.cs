@@ -23,8 +23,8 @@ public class GameController : MonoBehaviour
         firstSoundTextObject = GameObject.Find("FirstSoundText");
         secondSoundTextObject = GameObject.Find("SecondSoundText");
         thirdSoundTextObject = GameObject.Find("ThirdSoundText");
-        ConsonantAnswerButtons = GameObject.Find("ConsonantAnswerButtons");
-        VowelAnswerButtons = GameObject.Find("VowelAnswerButtons");
+        ConsonantAnswerButtons = GameObject.Find("ConsonantKeyboard");
+        VowelAnswerButtons = GameObject.Find("VowelKeyboard");
 
     }
     private void Start()
