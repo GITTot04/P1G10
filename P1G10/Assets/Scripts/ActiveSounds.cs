@@ -27,6 +27,7 @@ public class ActiveSounds : MonoBehaviour
         {
             children[i] = transform.GetChild(i).gameObject;
         }
+        SaveActiveSounds();
     }
     public void SaveActiveSounds()
     {
