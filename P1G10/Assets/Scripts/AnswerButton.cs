@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class AnswerButton : MonoBehaviour
 {
@@ -13,34 +14,55 @@ public class AnswerButton : MonoBehaviour
     public string buttonValue;
     private void Start()
     {
-        feedbackText = GameObject.Find("AnswerFeedbackText");
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            feedbackText = GameObject.Find("AnswerFeedbackText");
+            healthBar = GameObject.Find("Healthbar");
+        }
         gameController = GameObject.Find("GameMaster");
-        healthBar = GameObject.Find("Healthbar");
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     public void Answer()
     {
-        if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            if (buttonValue == gameController.GetComponent<GameController>().currentAnswer)
+            if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
             {
-                feedbackText.GetComponent<TextMeshProUGUI>().text = "Korrekt!";
-                player.GetComponent<PlayerScript>().DoDamage();
-            }
-            else
-            {
-                healthBar.GetComponent<HealtbarScript>().currentHealth -= 1;
-                healthBar.GetComponent<HealtbarScript>().TookDamage();
-                if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
+                if (buttonValue == gameController.GetComponent<GameController>().currentAnswer)
                 {
-                    feedbackText.GetComponent<TextMeshProUGUI>().text = "Prøv igen!";
+                    feedbackText.GetComponent<TextMeshProUGUI>().text = "Korrekt!";
+                    player.GetComponent<PlayerScript>().DoDamage();
                 }
                 else
                 {
-                    feedbackText.GetComponent<TextMeshProUGUI>().text = "Øv!";
+                    healthBar.GetComponent<HealtbarScript>().currentHealth -= 1;
+                    healthBar.GetComponent<HealtbarScript>().TookDamage();
+                    if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
+                    {
+                        feedbackText.GetComponent<TextMeshProUGUI>().text = "Prøv igen!";
+                    }
+                    else
+                    {
+                        feedbackText.GetComponent<TextMeshProUGUI>().text = "Øv!";
+                    }
                 }
+                gameController.GetComponent<GameController>().LoadNewValues();
             }
-            gameController.GetComponent<GameController>().LoadNewValues();
+        }
+        else
+        {
+            if (player.GetComponent<PlayerControllerJump>().HP != 0)
+            {
+                if (buttonValue == gameController.GetComponent<GameController>().currentAnswer)
+                {
+                    player.GetComponent<PlayerControllerJump>().goodJump();
+                }
+                else
+                {
+                    player.GetComponent<PlayerControllerJump>().badJump();
+                }
+                gameController.GetComponent<GameController>().LoadNewValues();
+            }
         }
     }
 }
