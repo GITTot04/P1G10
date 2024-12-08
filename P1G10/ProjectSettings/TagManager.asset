@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Ground
   - Obstacle
+  - UI
   layers:
   - Default
   - TransparentFX

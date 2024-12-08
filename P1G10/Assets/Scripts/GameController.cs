@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     string audioFileName;
     AudioSource currentAudio;
     bool canPlay = true;
+    public bool canSkip = true;
     GameObject ConsonantAnswerButtons;
     GameObject VowelAnswerButtons;
     private void Awake()
@@ -32,8 +34,10 @@ public class GameController : MonoBehaviour
         currentAudio = GetComponent<AudioSource>();
         LoadNewValues();
         SetAnswerButtons();
-        StartCoroutine(PlayAudio());
-
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            StartCoroutine(PlayAudio());
+        }
     }
     public void LoadNewValues()
     {
@@ -100,9 +104,10 @@ public class GameController : MonoBehaviour
         {
             thirdSoundTextObject.GetComponent<TextMeshProUGUI>().text = "_ I";
         }
-        StopAllCoroutines();
-        canPlay = true;
-        StartCoroutine(PlayAudio());
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            PlayCoroutine();
+        }
     }
 
     public void SetAnswerButtons()
@@ -117,15 +122,24 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void PlayCoroutine()
+    {
+        StopAllCoroutines();
+        canPlay = true;
+        StartCoroutine(PlayAudio());
+    }
+
     public IEnumerator PlayAudio()
     {
         if (canPlay)
         {
+            canSkip = false;
             canPlay = false;
             currentAudio.clip = currentFullSound;
             currentAudio.Play();
             yield return new WaitForSeconds(currentAudio.clip.length);
             canPlay = true;
+            canSkip = true;
         }
     }
 }
