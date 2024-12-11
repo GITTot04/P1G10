@@ -5197,6 +5197,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  guessValue: 2
+  voiceValue: 2
 --- !u!114 &547491660
 MonoBehaviour:
   m_ObjectHideFlags: 0

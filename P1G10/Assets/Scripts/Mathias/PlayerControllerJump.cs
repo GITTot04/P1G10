@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerControllerJump : MonoBehaviour
 {
@@ -25,15 +22,12 @@ public class PlayerControllerJump : MonoBehaviour
         restartButton = GameObject.Find("RestartButton");
         restartButton.SetActive(false);
     }
-    // Start is called before the first frame update
     void Start()
     {
         HP = 3;
         gameController = GameObject.Find("GameMaster");
         ui = GameObject.FindGameObjectWithTag("UI");
     }
-
-    // Update is called once per frame
     void Update()
     {
         lastVelocity = body.velocity;
@@ -63,8 +57,6 @@ public class PlayerControllerJump : MonoBehaviour
 
             HP -= 1;
             updateHealth();
-
-            Debug.Log(HP);
         }
         else if (coll.gameObject.tag == "Ground")
         {
@@ -74,14 +66,12 @@ public class PlayerControllerJump : MonoBehaviour
             {
                 gameController.GetComponent<GameController>().PlayCoroutine();
             }
-            /*animator.Play("frog_splat");*/
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "PrefabLoader")
         {
-            Debug.Log(collision.transform.parent.name);
             Instantiate(LevelPrefab, new Vector3(collision.transform.parent.transform.position.x + 46.79f, collision.transform.parent.transform.position.y, collision.transform.parent.transform.position.z), collision.transform.parent.transform.rotation);
         }
     }

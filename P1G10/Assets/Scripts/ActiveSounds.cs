@@ -64,8 +64,8 @@ public class ActiveSounds : MonoBehaviour
                 }
             }
         }
-
     }
+
     public void ChangeChildrenActivation()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)

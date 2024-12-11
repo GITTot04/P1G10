@@ -27,8 +27,8 @@ public class GameController : MonoBehaviour
         thirdSoundTextObject = GameObject.Find("ThirdSoundText");
         ConsonantAnswerButtons = GameObject.Find("ConsonantKeyboard");
         VowelAnswerButtons = GameObject.Find("VowelKeyboard");
-
     }
+
     private void Start()
     {
         currentAudio = GetComponent<AudioSource>();
@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(PlayAudio());
         }
     }
+
     public void LoadNewValues()
     {
         currentFirstSound = ActiveSounds.ActiveSoundsInfo.firstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.firstSound.Length)];
@@ -72,7 +73,6 @@ public class GameController : MonoBehaviour
         audioFileName = audioFileName.ToLower();
         audioFileName += ActiveSounds.ActiveSoundsInfo.voice;
         currentFullSound = Resources.Load <AudioClip>("Sounds/" + ActiveSounds.ActiveSoundsInfo.voice + "/" + audioFileName);
-        Debug.Log("Kontrol Sounds/" + ActiveSounds.ActiveSoundsInfo.voice + "/" + audioFileName);
         SetTextValues();
     }
 

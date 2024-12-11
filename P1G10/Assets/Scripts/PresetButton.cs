@@ -10,6 +10,8 @@ public class PresetButton : MonoBehaviour
     public Soundbite[] firstSoundPreset = new Soundbite[20];
     public Soundbite[] secondSoundPreset = new Soundbite[3];
     public Soundbite[] thirdSoundPreset = new Soundbite[20];
+    public int guessValue;
+    public int voiceValue;
     GameObject guessDropdown;
     GameObject voiceDropdown;
     private void Start()
@@ -19,18 +21,7 @@ public class PresetButton : MonoBehaviour
     }
     public void UpdateActiveSounds()
     {
-        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("FirstSound"))
-        {
-            toggle.GetComponent<Toggle>().isOn = false;
-        }
-        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("SecondSound"))
-        {
-            toggle.GetComponent<Toggle>().isOn = false;
-        }
-        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("ThirdSound"))
-        {
-            toggle.GetComponent<Toggle>().isOn = false;
-        }
+        SetAllTogglesFalse();
         Array.Clear(ActiveSounds.ActiveSoundsInfo.firstSound, 0, ActiveSounds.ActiveSoundsInfo.firstSound.Length);
         Array.Clear(ActiveSounds.ActiveSoundsInfo.secondSound, 0, ActiveSounds.ActiveSoundsInfo.secondSound.Length);
         Array.Clear(ActiveSounds.ActiveSoundsInfo.thirdSound, 0, ActiveSounds.ActiveSoundsInfo.thirdSound.Length);
@@ -64,7 +55,23 @@ public class PresetButton : MonoBehaviour
                 i++;
             }
         }
-        guessDropdown.GetComponent<TMP_Dropdown>().value = 2;
-        voiceDropdown.GetComponent<TMP_Dropdown>().value = 2;
+        guessDropdown.GetComponent<TMP_Dropdown>().value = guessValue;
+        voiceDropdown.GetComponent<TMP_Dropdown>().value = voiceValue;
+    }
+
+    void SetAllTogglesFalse()
+    {
+        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("FirstSound"))
+        {
+            toggle.GetComponent<Toggle>().isOn = false;
+        }
+        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("SecondSound"))
+        {
+            toggle.GetComponent<Toggle>().isOn = false;
+        }
+        foreach (GameObject toggle in GameObject.FindGameObjectsWithTag("ThirdSound"))
+        {
+            toggle.GetComponent<Toggle>().isOn = false;
+        }
     }
 }
