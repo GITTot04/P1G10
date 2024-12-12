@@ -8,12 +8,12 @@ using UnityEngine.SceneManagement;
 public class ActiveSounds : MonoBehaviour
 {
     public static ActiveSounds ActiveSoundsInfo;
-    // Fjern public fra disse arrays når testing er done
-    public Soundbite[] FirstSound = new Soundbite[20];
-    public Soundbite[] SecondSound = new Soundbite[3];
-    public Soundbite[] ThirdSound = new Soundbite[20];
+    public Soundbite[] firstSound = new Soundbite[20];
+    public Soundbite[] secondSound = new Soundbite[3];
+    public Soundbite[] thirdSound = new Soundbite[20];
     public GameObject[] children = new GameObject[10];
     public int guessValue = 0;
+    public string voice = "M1";
     private void Awake()
     {
         if (ActiveSoundsInfo != null)
@@ -27,14 +27,15 @@ public class ActiveSounds : MonoBehaviour
         {
             children[i] = transform.GetChild(i).gameObject;
         }
+        SaveActiveSounds();
     }
     public void SaveActiveSounds()
     {
         if (CheckFirstSoundToggles() && CheckSecondSoundToggles() && CheckThirdSoundToggles())
         {
-            Array.Clear(FirstSound, 0, FirstSound.Length);
-            Array.Clear(SecondSound, 0, SecondSound.Length);
-            Array.Clear(ThirdSound, 0, ThirdSound.Length);
+            Array.Clear(firstSound, 0, firstSound.Length);
+            Array.Clear(secondSound, 0, secondSound.Length);
+            Array.Clear(thirdSound, 0, thirdSound.Length);
             int i = 0;
             int j = 0;
             int k = 0;
@@ -42,7 +43,7 @@ public class ActiveSounds : MonoBehaviour
             {
                 if (FirstSoundToggle.GetComponent<Toggle>().isOn)
                 {
-                    FirstSound[i] = FirstSoundToggle.GetComponent<Soundbite>();
+                    firstSound[i] = FirstSoundToggle.GetComponent<Soundbite>();
                     i++;
                 }
             }
@@ -50,7 +51,7 @@ public class ActiveSounds : MonoBehaviour
             {
                 if (SecondSoundToggle.GetComponent<Toggle>().isOn)
                 {
-                    SecondSound[j] = SecondSoundToggle.GetComponent<Soundbite>();
+                    secondSound[j] = SecondSoundToggle.GetComponent<Soundbite>();
                     j++;
                 }
             }
@@ -58,13 +59,13 @@ public class ActiveSounds : MonoBehaviour
             {
                 if (ThirdSoundToggle.GetComponent<Toggle>().isOn)
                 {
-                    ThirdSound[k] = ThirdSoundToggle.GetComponent<Soundbite>();
+                    thirdSound[k] = ThirdSoundToggle.GetComponent<Soundbite>();
                     k++;
                 }
             }
         }
-
     }
+
     public void ChangeChildrenActivation()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)

@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     Soundbite currentFirstSound;
     Soundbite currentSecondSound;
     Soundbite currentThirdSound;
+    AudioClip currentFullSound;
     public string currentAnswer;
     GameObject firstSoundTextObject;
     GameObject secondSoundTextObject;
     GameObject thirdSoundTextObject;
+    string audioFileName;
     AudioSource currentAudio;
     bool canPlay = true;
+    public bool canSkip = true;
     GameObject ConsonantAnswerButtons;
     GameObject VowelAnswerButtons;
     private void Awake()
@@ -21,47 +25,54 @@ public class GameController : MonoBehaviour
         firstSoundTextObject = GameObject.Find("FirstSoundText");
         secondSoundTextObject = GameObject.Find("SecondSoundText");
         thirdSoundTextObject = GameObject.Find("ThirdSoundText");
-        ConsonantAnswerButtons = GameObject.Find("ConsonantAnswerButtons");
-        VowelAnswerButtons = GameObject.Find("VowelAnswerButtons");
-
+        ConsonantAnswerButtons = GameObject.Find("ConsonantKeyboard");
+        VowelAnswerButtons = GameObject.Find("VowelKeyboard");
     }
+
     private void Start()
     {
         currentAudio = GetComponent<AudioSource>();
         LoadNewValues();
         SetAnswerButtons();
-        StartCoroutine(PlayAudio());
-
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            StartCoroutine(PlayAudio());
+        }
     }
+
     public void LoadNewValues()
     {
-        currentFirstSound = ActiveSounds.ActiveSoundsInfo.FirstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.FirstSound.Length)];
+        currentFirstSound = ActiveSounds.ActiveSoundsInfo.firstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.firstSound.Length)];
         while (currentFirstSound == null)
         {
-            currentFirstSound = ActiveSounds.ActiveSoundsInfo.FirstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.FirstSound.Length)];
+            currentFirstSound = ActiveSounds.ActiveSoundsInfo.firstSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.firstSound.Length)];
         }
         if (ActiveSounds.ActiveSoundsInfo.guessValue == 0)
         {
             currentAnswer = currentFirstSound.value;
         }
-        currentSecondSound = ActiveSounds.ActiveSoundsInfo.SecondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.SecondSound.Length)];
+        currentSecondSound = ActiveSounds.ActiveSoundsInfo.secondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.secondSound.Length)];
         while (currentSecondSound == null)
         {
-            currentSecondSound = ActiveSounds.ActiveSoundsInfo.SecondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.SecondSound.Length)];
+            currentSecondSound = ActiveSounds.ActiveSoundsInfo.secondSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.secondSound.Length)];
         }
         if (ActiveSounds.ActiveSoundsInfo.guessValue == 1)
         {
             currentAnswer = currentSecondSound.value;
         }
-        currentThirdSound = ActiveSounds.ActiveSoundsInfo.ThirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.ThirdSound.Length)];
+        currentThirdSound = ActiveSounds.ActiveSoundsInfo.thirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.thirdSound.Length)];
         while (currentThirdSound == null)
         {
-            currentThirdSound = ActiveSounds.ActiveSoundsInfo.ThirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.ThirdSound.Length)];
+            currentThirdSound = ActiveSounds.ActiveSoundsInfo.thirdSound[Random.Range(0, ActiveSounds.ActiveSoundsInfo.thirdSound.Length)];
         }
         if (ActiveSounds.ActiveSoundsInfo.guessValue == 2)
         {
             currentAnswer = currentThirdSound.value;
         }
+        audioFileName = currentFirstSound.value + currentSecondSound.value + currentThirdSound.value + "i_";
+        audioFileName = audioFileName.ToLower();
+        audioFileName += ActiveSounds.ActiveSoundsInfo.voice;
+        currentFullSound = Resources.Load <AudioClip>("Sounds/" + ActiveSounds.ActiveSoundsInfo.voice + "/" + audioFileName);
         SetTextValues();
     }
 
@@ -93,9 +104,10 @@ public class GameController : MonoBehaviour
         {
             thirdSoundTextObject.GetComponent<TextMeshProUGUI>().text = "_ I";
         }
-        StopAllCoroutines();
-        canPlay = true;
-        StartCoroutine(PlayAudio());
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            PlayCoroutine();
+        }
     }
 
     public void SetAnswerButtons()
@@ -110,21 +122,24 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void PlayCoroutine()
+    {
+        StopAllCoroutines();
+        canPlay = true;
+        StartCoroutine(PlayAudio());
+    }
+
     public IEnumerator PlayAudio()
     {
         if (canPlay)
         {
+            canSkip = false;
             canPlay = false;
-            currentAudio.clip = currentFirstSound.audio;
-            currentAudio.Play();
-            yield return new WaitForSeconds(currentAudio.clip.length);
-            currentAudio.clip = currentSecondSound.audio;
-            currentAudio.Play();
-            yield return new WaitForSeconds(currentAudio.clip.length);
-            currentAudio.clip = currentThirdSound.audio;
+            currentAudio.clip = currentFullSound;
             currentAudio.Play();
             yield return new WaitForSeconds(currentAudio.clip.length);
             canPlay = true;
+            canSkip = true;
         }
     }
 }

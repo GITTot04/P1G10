@@ -5,4 +5,5 @@ using UnityEngine;
 public class Soundbite : MonoBehaviour
 {
     public string value;
+    public new AudioClip audio;
 }
