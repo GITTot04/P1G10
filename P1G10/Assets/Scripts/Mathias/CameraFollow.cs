@@ -7,8 +7,6 @@ public class CameraFollow : MonoBehaviour
     public float followSpeed;
     public Transform target;
 
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         Vector3 newPos = new Vector3(target.position.x, target.position.y, -10);

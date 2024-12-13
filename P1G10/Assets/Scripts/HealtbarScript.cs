@@ -27,11 +27,7 @@ public class HealtbarScript : MonoBehaviour
             case 0:
                 transform.GetChild(0).GetComponent<Image>().sprite = emptyHealth;
                 restartButton.SetActive(true);
-                // add "You lost" message or something here
                 break;
         }
     }
-
-
-
 }
