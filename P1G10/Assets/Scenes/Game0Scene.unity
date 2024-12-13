@@ -7054,6 +7054,7 @@ GameObject:
   - component: {fileID: 1725152398}
   - component: {fileID: 1725152401}
   - component: {fileID: 1725152400}
+  - component: {fileID: 1725152402}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -7209,6 +7210,29 @@ MonoBehaviour:
   - {fileID: 8475628645140449038, guid: 8624e7bf23dd5a04d8f36409b790cb05, type: 3}
   - {fileID: 8475628645140449038, guid: 37962c37d836fbb409f4a33541d0cf38, type: 3}
   - {fileID: 8475628645140449038, guid: 86c03ba4168cec94ea774f003cd6f34d, type: 3}
+--- !u!164 &1725152402
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725152397}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: 0
+  m_RoomHF: 0
+  m_DecayTime: 1
+  m_DecayHFRatio: 0.5
+  m_ReflectionsLevel: -10000
+  m_ReverbLevel: 0
+  m_ReverbDelay: 0.04
+  m_Diffusion: 100
+  m_Density: 100
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: 0
+  m_ReverbPreset: 27
 --- !u!1 &1820296462
 GameObject:
   m_ObjectHideFlags: 0
