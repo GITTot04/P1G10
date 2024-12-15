@@ -17,6 +17,7 @@ public class PlayerControllerJump : MonoBehaviour
     GameObject ui;
     GameObject restartButton;
     public GameObject LevelPrefab;
+    public float newLevelLocation;
     private void Awake()
     {
         restartButton = GameObject.Find("RestartButton");
@@ -72,7 +73,7 @@ public class PlayerControllerJump : MonoBehaviour
     {
         if (collision.name == "PrefabLoader")
         {
-            Instantiate(LevelPrefab, new Vector3(collision.transform.parent.transform.position.x + 46.79f, collision.transform.parent.transform.position.y, collision.transform.parent.transform.position.z), collision.transform.parent.transform.rotation);
+            Instantiate(LevelPrefab, new Vector3(collision.transform.parent.transform.position.x + newLevelLocation, collision.transform.parent.transform.position.y, collision.transform.parent.transform.position.z), collision.transform.parent.transform.rotation);
         }
     }
 
