@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    Soundbite currentFirstSound;
-    Soundbite currentSecondSound;
-    Soundbite currentThirdSound;
+    public Soundbite currentFirstSound;
+    public Soundbite currentSecondSound;
+    public Soundbite currentThirdSound;
     AudioClip currentFullSound;
     public string currentAnswer;
     GameObject firstSoundTextObject;

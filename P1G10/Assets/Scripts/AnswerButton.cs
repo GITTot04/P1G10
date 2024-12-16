@@ -29,11 +29,13 @@ public class AnswerButton : MonoBehaviour
             {
                 if (buttonValue == gameController.GetComponent<GameController>().currentAnswer)
                 {
+                    gameController.GetComponent<EndScreenScript>().AddCorrectAnswer();
                     feedbackText.GetComponent<TextMeshProUGUI>().text = "Korrekt!";
                     player.GetComponent<PlayerScript>().DoDamage();
                 }
                 else
                 {
+                    gameController.GetComponent<EndScreenScript>().AddIncorrectAnswer();
                     healthBar.GetComponent<HealtbarScript>().currentHealth -= 1;
                     healthBar.GetComponent<HealtbarScript>().TookDamage();
                     if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
@@ -54,10 +56,12 @@ public class AnswerButton : MonoBehaviour
             {
                 if (buttonValue == gameController.GetComponent<GameController>().currentAnswer)
                 {
+                    gameController.GetComponent<EndScreenScript>().AddCorrectAnswer();
                     player.GetComponent<PlayerControllerJump>().goodJump();
                 }
                 else
                 {
+                    gameController.GetComponent<EndScreenScript>().AddIncorrectAnswer();
                     player.GetComponent<PlayerControllerJump>().badJump();
                 }
                 gameController.GetComponent<GameController>().LoadNewValues();

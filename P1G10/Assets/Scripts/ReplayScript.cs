@@ -26,6 +26,7 @@ public class ReplayScript : MonoBehaviour
         {
             if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0)
             {
+                gameController.GetComponent<EndScreenScript>().AddReplayedAnswer();
                 StartCoroutine(gameController.GetComponent<GameController>().PlayAudio());
             }
         }
@@ -33,6 +34,7 @@ public class ReplayScript : MonoBehaviour
         {
             if (player.GetComponent<PlayerControllerJump>().HP != 0)
             {
+                gameController.GetComponent<EndScreenScript>().AddReplayedAnswer();
                 StartCoroutine(gameController.GetComponent<GameController>().PlayAudio());
             }
         }
