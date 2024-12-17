@@ -16,12 +16,15 @@ public class PlayerControllerJump : MonoBehaviour
     GameObject gameController;
     GameObject ui;
     GameObject restartButton;
+    GameObject endscreenButton;
     public GameObject LevelPrefab;
     public float newLevelLocation;
     private void Awake()
     {
         restartButton = GameObject.Find("RestartButton");
+        endscreenButton = GameObject.Find("OpenEndscreenButton");
         restartButton.SetActive(false);
+        endscreenButton.SetActive(false);
     }
     void Start()
     {
@@ -95,6 +98,7 @@ public class PlayerControllerJump : MonoBehaviour
             case 0:
                 GameObject.Find("Heart 3").GetComponent<SpriteRenderer>().sprite = heartEmpty;
                 restartButton.SetActive(true);
+                endscreenButton.SetActive(true);
                 break;
         }
     }

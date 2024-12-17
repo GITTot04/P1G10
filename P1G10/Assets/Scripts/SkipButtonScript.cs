@@ -26,11 +26,13 @@ public class SkipButtonScript : MonoBehaviour
         {
             if (healthBar.GetComponent<HealtbarScript>().currentHealth != 0 && gameController.GetComponent<GameController>().canSkip)
             {
+                gameController.GetComponent<EndScreenScript>().AddSkippedAnswer();
                 gameController.GetComponent<GameController>().LoadNewValues();
             }
         }
         else if (player.GetComponent<PlayerControllerJump>().HP != 0 && gameController.GetComponent<GameController>().canSkip)
         {
+            gameController.GetComponent<EndScreenScript>().AddSkippedAnswer();
             gameController.GetComponent<GameController>().LoadNewValues();
             gameController.GetComponent<GameController>().PlayCoroutine();
         }

@@ -8,10 +8,13 @@ public class HealtbarScript : MonoBehaviour
     public Sprite emptyHealth;
     public int currentHealth = 3;
     GameObject restartButton;
+    GameObject endscreenButton;
     private void Awake()
     {
         restartButton = GameObject.Find("RestartButton");
+        endscreenButton = GameObject.Find("OpenEndscreenButton");
         restartButton.SetActive(false);
+        endscreenButton.SetActive(false);
     }
 
     public void TookDamage()
@@ -27,6 +30,7 @@ public class HealtbarScript : MonoBehaviour
             case 0:
                 transform.GetChild(0).GetComponent<Image>().sprite = emptyHealth;
                 restartButton.SetActive(true);
+                endscreenButton.SetActive(true);
                 break;
         }
     }
