@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerJump : MonoBehaviour
+    //variables
 {
     public Rigidbody2D body;
     public int jumpXSpeed;
@@ -36,6 +37,9 @@ public class PlayerControllerJump : MonoBehaviour
     {
         lastVelocity = body.velocity;
     }
+
+    // Method used when the correct answer is input. It makes the frog leap
+    // over the obstacle by creating a new velocity vector based on the jump speed variables.
     public void goodJump() 
     {
         body.velocity = new Vector2(jumpXSpeed, jumpYSpeed);
